@@ -12,7 +12,3 @@ __plugin_meta__ = PluginMetadata(
         "author": "jcjrobert <jcjrobbie@gmail.com>",
     },
 )
-
-__plugin_name__ = "bilibili_image"
-__plugin_description__ = "b站专栏图片下载"
-__plugin_command__ = "专栏图片下载 + cvid/url"

@@ -6,22 +6,14 @@ from typing import List
 
 from .utils import *
 
-"""
-提取cv号
 
-支持：
-①直接的cv号
-②带有cv号专栏网址
-③短链接跳转
-"""
 async def get_cvid(args: str) -> str:
-    """提取https网址"""
     url_pattern = re.compile(r"[a-zA-z]+://[^\s]*")
     url = url_pattern.search(args)
     if url:
         url = url.group(0)
     else:
-        url = ""
+        url = args
     cvid = args
     if "b23.tv" in url:
         try:
@@ -36,10 +28,6 @@ async def get_cvid(args: str) -> str:
     return cvid
 
 
-"""
-验证专栏号是否有效
-并且获取专栏头图（如果有）
-"""
 async def get_bilibili_article_viewinfo(cvid: str):
     url = f"https://api.bilibili.com/x/article/viewinfo?id={cvid}"
     valid = False
@@ -57,9 +45,6 @@ async def get_bilibili_article_viewinfo(cvid: str):
     return valid, banner_url, title
 
 
-"""
-直接读取专栏获取图片
-"""
 async def get_bilibili_article_images(valid: bool, banner_url: str, cvid: str):
     img_urls: List[str] = []
     images = []

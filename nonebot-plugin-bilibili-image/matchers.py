@@ -18,9 +18,7 @@ from .config import config
 from .article import *
 from .utils import *
 
-"""
-专栏
-"""
+
 article = on_command("专栏图片下载", aliases={"专栏下载"}, block=True, priority=12)
 @article.handle()
 async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
@@ -30,9 +28,6 @@ async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
     valid, banner_url, title = await get_bilibili_article_viewinfo(cvid)
     res = await get_bilibili_article_images(valid, banner_url, cvid)
     if res:
-        """
-        上传文件
-        """
         zip_file = zip_images(res)
         filename = f"{title} - cv{cvid}.zip"
         try:
@@ -40,9 +35,6 @@ async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
         except:
             traceback.print_exc()
             logger.warning("上传文件失败")
-        """
-        发送转发信息
-        """
         max_forward_msg_num = config.max_forward_msg_num
         msgs: List[Message] = [
             Message(MessageSegment.image(msg)) for msg in res
@@ -58,9 +50,6 @@ async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
         await bot.send(event=event,message="没有读取到该专栏的任何图片信息，请确认输入的网址/cvid是否正确",at_sender=True)
 
 
-"""
-发送接口
-"""
 async def send_forward_msg(
     bot: Bot,
     event: MessageEvent,

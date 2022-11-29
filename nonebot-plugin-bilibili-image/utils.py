@@ -31,9 +31,6 @@ async def get(client: httpx.AsyncClient, url: str, **kwargs):
     return await client.get(url, headers=headers, timeout=10, **kwargs)
 
 
-"""
-将图片打包成zip（图片类型自动判断）
-"""
 def zip_images(files: List[BytesIO]):
     output = BytesIO()
     with ZipFile(output, "w", ZIP_BZIP2) as zip_file:
