@@ -15,8 +15,27 @@ from nonebot.adapters.onebot.v11 import (
 from nonebot.log import logger
 
 from .config import config
+from .video import *
 from .article import *
 from .utils import *
+
+
+video = on_command("b站封面", aliases={"B站封面"}, block=True, priority=12)
+@video.handle()
+async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
+    url = args.extract_plain_text()
+    bvid = await get_bvid(url)
+    valid, data = await get_bilibili_video_viewinfo(bvid)
+    if valid:
+        title = data.get("title")
+        up = data.get("owner").get("name")
+        tname = data.get("tname")
+        pic = data.get("pic")
+        tosend = f"\n标题：{title}\nUP主：{up}\n分区：{tname}"
+        tosend = Message(tosend) + MessageSegment.image(file=pic)
+        await bot.send(event=event,message=tosend,at_sender=True)
+    else:
+        await bot.send(event=event,message="未找到该视频，请确认输入的网址/bvid是否正确",at_sender=True)
 
 
 article = on_command("专栏图片下载", aliases={"专栏下载"}, block=True, priority=12)
