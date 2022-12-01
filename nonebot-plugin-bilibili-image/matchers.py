@@ -16,6 +16,7 @@ from nonebot.log import logger
 
 from .config import config
 from .video import *
+from .dynamic import *
 from .article import *
 from .utils import *
 
@@ -36,6 +37,42 @@ async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
         await bot.send(event=event,message=tosend,at_sender=True)
     else:
         await bot.send(event=event,message="未找到该视频，请确认输入的网址/bvid是否正确",at_sender=True)
+
+
+dynamic = on_command("动态图片", aliases={"动态下载","动态获取"}, block=True, priority=12)
+@dynamic.handle()
+async def _(bot: Bot, event: MessageEvent, args: Message = CommandArg()):
+    await bot.send(event=event,message="正在读取动态图片中，请耐心等待",at_sender=True)
+    url = args.extract_plain_text()
+    did = await get_did(url)
+    res = await get_bilibili_get_dynamic_detail(did)
+    if res:
+        """
+        上传文件
+        """
+        zip_file = zip_images(res)
+        filename = f"b站动态{did}.zip"
+        try:
+            await upload_file(bot, event, zip_file, filename)
+        except:
+            traceback.print_exc()
+            logger.warning("上传文件失败")
+        """
+        发送转发信息
+        """
+        max_forward_msg_num = config.max_forward_msg_num
+        msgs: List[Message] = [
+            Message(MessageSegment.image(msg)) for msg in res
+        ]
+        if len(msgs) > max_forward_msg_num:
+            step = math.ceil(len(msgs) / max_forward_msg_num)
+            msgs = [
+                Message(chain.from_iterable(msgs[i : i + step]))
+                for i in range(0, len(msgs) - 1, step)
+            ]
+        await send_forward_msg(bot, event, config.nickname[0], bot.self_id, msgs)
+    else:
+        await bot.send(event=event,message="没有读取到该动态的任何图片信息，请确认输入的网址/动态id是否正确，并且确保动态是图片动态",at_sender=True)
 
 
 article = on_command("专栏图片下载", aliases={"专栏下载"}, block=True, priority=12)
