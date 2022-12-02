@@ -97,3 +97,22 @@ b站封面提取，动态图片/专栏图片下载
 | 专栏图片/专栏下载/专栏获取 + cv号/url/短链接 | 同上 |
 
 除了b站封面获取，都会在获取后发送文件和转发信息，转发信息用于预览（图片画质会压缩），发送文件用于使用
+
+## 📝 更新日志
+
+<details>
+<summary>展开/收起</summary>
+
+### 0.0.1
+
+- 插件初次发布
+
+</details>
+
+## 💡 特别感谢
+
+- [noneplugin/nonebot-plugin-imagetools](https://github.com/noneplugin/nonebot-plugin-imagetools) Nonebot2 简单图片操作插件
+
+## 📄 开源许可
+
+本项目使用[AGPL-3.0](./LICENSE)许可证开源
