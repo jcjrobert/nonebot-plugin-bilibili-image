@@ -25,6 +25,12 @@ _✨ b站图片下载 ✨_
 
 b站封面提取，动态图片/专栏图片下载
 
+本插件使用了 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 的 `send_group_forward_msg` 和 `send_private_forward_msg` 接口 来发送合并转发消息，使用了 `upload_group_file` 和 `upload_private_file` 接口 来上传文件
+
+发送私聊合并转发消息需要使用 `v1.0.0-rc2` 版本以上的 go-cqhttp
+
+上传私聊文件需要使用 `v1.0.0-rc3` 版本以上的 go-cqhttp
+
 ## 💿 安装
 
 <details>
