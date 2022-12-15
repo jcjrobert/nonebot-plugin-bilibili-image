@@ -68,7 +68,7 @@ b站封面提取，动态图片/专栏图片下载
 
 打开 nonebot2 项目的 `bot.py` 文件, 在其中写入
 
-    nonebot.load_plugin('nonebot_plugin_bilibili_image')
+    nonebot.load_plugin('nonebot-plugin-bilibili-image')
 
 </details>
 
@@ -80,7 +80,7 @@ b站封面提取，动态图片/专栏图片下载
 
 打开 nonebot2 项目的 `bot.py` 文件, 在其中写入
 
-    nonebot.load_plugin('src.plugins.nonebot_plugin_bilibili_image')
+    nonebot.load_plugin('src.plugins.nonebot-plugin-bilibili-image')
 
 </details>
 
