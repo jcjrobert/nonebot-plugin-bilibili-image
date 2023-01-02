@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8", errors="ignore") as f:
     long_description = f.read()
     setuptools.setup(
         name='nonebot-plugin-bilibili-image',
-        version='0.0.1',
+        version='0.0.2',
         author='jcjrobert',
         author_email='jcjrobbie@gmail.com',
         keywords=["pip", "nonebot2", "nonebot", "bilibili"],
