@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8", errors="ignore") as f:
     long_description = f.read()
     setuptools.setup(
         name='nonebot-plugin-bilibili-image',
-        version='0.0.2',
+        version='0.0.2.1',
         author='jcjrobert',
         author_email='jcjrobbie@gmail.com',
         keywords=["pip", "nonebot2", "nonebot", "bilibili"],
@@ -21,6 +21,6 @@ with open("README.md", "r", encoding="utf-8", errors="ignore") as f:
         include_package_data=True,
         platforms="any",
         install_requires=[
-            'nonebot2>=2.0.0-beta.4', 'nonebot-adapter-onebot>=2.0.0-beta.4', 'httpx>=0.19.0', 
+            'nonebot2>=2.0.0-beta.4', 'nonebot-adapter-onebot>=2.0.0-beta.4', 'httpx>=0.19.0', 'beautifulsoup4>=4.0.0'
         ]
     )

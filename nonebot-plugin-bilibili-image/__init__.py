@@ -1,7 +1,7 @@
 from . import matchers
 from nonebot.plugin import PluginMetadata
 
-__version__ = "0.0.2"
+__version__ = "0.0.2.1"
 __plugin_meta__ = PluginMetadata(
     name="b站图片下载",
     description="b站封面提取，动态图片/专栏图片下载",
