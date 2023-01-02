@@ -143,3 +143,11 @@ async def upload_file(
             await bot.call_api(
                 "upload_private_file", user_id=event.user_id, file=f.name, name=filename
             )
+    if config.bilibili_image_save_local:
+        from pathlib import Path
+        path = Path() / "data" / "download"
+        if not path.exists():
+            path.mkdir(parents=True, exist_ok=True)
+        with path.joinpath(filename).open("wb+") as f:
+            f.write(file.getbuffer())
+        logger.info(f"{filename}已保存在{path.resolve()}中，请自行获取")
